@@ -1,0 +1,22 @@
+{
+  "name": "web-components-playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "custom-element.js",
+  "scripts": {
+    "tsc": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/askibinski/web_components.git"
+  },
+  "author": "Albert Skibinski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/askibinski/web_components/issues"
+  },
+  "homepage": "https://github.com/askibinski/web_components#readme",
+  "dependencies": {
+    "typescript": "^3.8.3"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "allowJs": true,
+    "target": "esnext"
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "lib": [
+    "esnext",
+    "dom"
+  ]
+}

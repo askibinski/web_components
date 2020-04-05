@@ -1,6 +1,8 @@
 // Borrowed from https://github.com/DannyMoerkerke/custom-element
 // Read his blog post at https://medium.com/swlh/https-medium-com-drmoerkerke-data-binding-for-web-components-in-just-a-few-lines-of-code-33f0a46943b3
 export default class CustomElement extends HTMLElement {
+  state: {};
+
   constructor() {
     super();
 
@@ -11,7 +13,7 @@ export default class CustomElement extends HTMLElement {
     return Object.getPrototypeOf(customElements.get(element.tagName.toLowerCase())).name === 'CustomElement';
   }
 
-  updateBindings(prop, value = '') {
+  updateBindings(prop, value) {
     const bindings = [...this.selectAll(`[data-bind$="${prop}"]`)];
 
     bindings.forEach(node => {
@@ -21,21 +23,21 @@ export default class CustomElement extends HTMLElement {
       const target = [...this.selectAll(node.tagName)].find(el => el === node);
       const isStateUpdate = dataProp.includes(':') && this.isCustomElement(target);
 
-      isStateUpdate ? target.setState({[`${bindProp}`]: bindValue}) :
+      isStateUpdate ? target.setState({ [`${bindProp}`]: bindValue }) :
         this.isArray(bindValue) ? target[bindProp] = bindValue : node.textContent = bindValue.toString();
     });
   }
 
   setState(newState) {
     Object.entries(newState)
-    .forEach(([key, value]) => {
-      this.state[key] = this.isObject(this.state[key]) && this.isObject(value) ? {...this.state[key], ...value} : value;
+      .forEach(([key, value]) => {
+        this.state[key] = this.isObject(this.state[key]) && this.isObject(value) ? { ...this.state[key], ...(value as object) } : value;
 
-      const bindKey = this.isObject(value) ? this.getBindKey(key, value) : key;
-      const bindKeys = this.isArray(bindKey) ? bindKey : [bindKey];
+        const bindKey = this.isObject(value) ? this.getBindKey(key, value) : key;
+        const bindKeys = this.isArray(bindKey) ? bindKey : [bindKey];
 
-      bindKeys.forEach(key => this.updateBindings(key, value));
-    });
+        bindKeys.forEach(key => this.updateBindings(key, value));
+      });
   }
 
   getBindKey(key, obj) {

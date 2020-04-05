@@ -1,4 +1,6 @@
 class MyElement extends HTMLElement {
+  state: {};
+  container: any;
 
   // Defines a Shadow root with mode: 'open'. This means it can be inspected in dev tools 
   // and interacted with, either by querying it, configuring any exposed CSS properties or 
@@ -12,7 +14,7 @@ class MyElement extends HTMLElement {
     // Used for data binding.
     this.state = {};
 
-    const shadowRoot = this.attachShadow({mode: 'open'});
+    const shadowRoot = this.attachShadow({ mode: 'open' });
 
     // We could also use a <template> element. 
     shadowRoot.innerHTML = `      
@@ -29,7 +31,7 @@ class MyElement extends HTMLElement {
 
     this.container = shadowRoot.querySelector('#container');
   }
-  
+
   // Analogue to Reacts componentDidMount.
   connectedCallback() {
     // Here the element has been inserted into the DOM.
@@ -40,12 +42,12 @@ class MyElement extends HTMLElement {
   static get observedAttributes() {
     return ['foo', 'bar', 'disabled'];
   }
-  
+
   // Whenever the value of the attribute changes attributeChangedCallback will be called with 
   // the name of the attribute, its current value and its new value.
   // Reminder: the primary purpose of attributes on web components is initial configuration. 
   attributeChangedCallback(attr, oldVal, newVal) {
-    switch(attr) {
+    switch (attr) {
       case 'foo':
         // Do something with 'foo' attribute.
         console.log('foo change!');
@@ -65,14 +67,14 @@ class MyElement extends HTMLElement {
 
   // Setting the property myElement.disabled = TRUE will also set the attribute.
   set disabled(isDisabled) {
-    if(isDisabled) {
+    if (isDisabled) {
       this.setAttribute('disabled', '');
     }
     else {
       this.removeAttribute('disabled');
     }
-  } 
-  
+  }
+
   // Getter e.g. myElement.disabled; will return a boolean.
   get disabled() {
     return this.hasAttribute('disabled');
