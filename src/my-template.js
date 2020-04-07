@@ -1,4 +1,4 @@
-import {html, render} from './node_modules/lit-html/lit-html.js';
+import {html, render} from 'lit-html';
 
 // Define a template
 // NOTE: this is not yet a custom element. We would need lit-element for that.
@@ -7,5 +7,4 @@ const myTemplate = (data) => html`
   <div>${data.body}</div>
 `;
 
-// Render the template to the document
-render(myTemplate({ title: 'Hello world', body: 'Lorem ipsum'}), document.body);
+render(myTemplate({ title: `Hello world!`, body: `I'm a template!` }), document.body);
