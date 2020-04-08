@@ -1,22 +1,28 @@
 {
-  "name": "web_components_lit_html",
-  "version": "1.0.0",
-  "description": "",
-  "devDependencies": {},
+  "name": "web-components-stencil",
+  "version": "0.0.1",
+  "description": "Stencil Component Starter",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/web-components-stencil/web-components-stencil.js",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "stencil build --docs",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "generate": "stencil generate"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/askibinski/web_components.git"
+  "devDependencies": {
+    "@stencil/core": "^1.12.2"
   },
-  "author": "Albert Skibinski",
-  "license": "ISC",
-  "dependencies": {
-    "lit-element": "^2.3.1",
-    "lit-html": "^1.2.1",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
-  }
+  "license": "MIT"
 }
