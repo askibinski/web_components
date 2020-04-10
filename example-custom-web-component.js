@@ -1,22 +1,25 @@
 class MyElement extends HTMLElement {
 
-  // Defines a Shadow root with mode: 'open'. This means it can be inspected in dev tools 
-  // and interacted with, either by querying it, configuring any exposed CSS properties or 
-  // listening to events it throws. It is also possible to define the Shadow root with mode: 
-  // 'closed' which is not recommended since it will not allow the consumer of the component
-  // to interact with it in any way; you won't even be able to listen to events it throws.
+  // This element contains some Lifecycle API methods which are just for example.
   constructor() {
     // Always call super first in constructor
     super();
 
-    // Used for data binding.
-    this.state = {};
-
+    // Defines a Shadow root with mode: 'open'. This means it can be inspected in dev tools 
+    // and interacted with, either by querying it, configuring any exposed CSS properties or 
+    // listening to events it throws. It is also possible to define the Shadow root with mode: 
+    // 'closed' which is not recommended since it will not allow the consumer of the component
+    // to interact with it in any way; you won't even be able to listen to events it throws.
     const shadowRoot = this.attachShadow({mode: 'open'});
 
-    // We could also use a <template> element. 
+    // We could also use a <template> element, however many guides on the web still use HTML
+    // imports to import the template and JS and imports are deprecated.
+    // See https://developer.mozilla.org/en-US/docs/Web/Web_Components/HTML_Imports
     shadowRoot.innerHTML = `      
       <style>
+        h1 {
+          color: #0000ff;
+        }
         :host {
           display: block;
         }
@@ -24,7 +27,7 @@ class MyElement extends HTMLElement {
           opacity: 0.5;
         }
       </style>
-      <div id="container"></div>
+      <h1 id="container"><slot></slot></div>
     `;
 
     this.container = shadowRoot.querySelector('#container');
@@ -92,7 +95,6 @@ class MyElement extends HTMLElement {
 // The browser will treat any HTML element it does not know as such and you can interact with it just 
 // like any other element, besides that it won't have any methods or default styling.
 window.customElements.define('my-element', MyElement);
-const el = customElements.get('my-element');
-const myElement = new el();  // same as document.createElement('my-element');
-myElement.container.innerHTML = 'Hello world!'
-document.body.appendChild(myElement);
+// const el = customElements.get('my-element');
+// const myElement = new el();  // same as document.createElement('my-element');
+
