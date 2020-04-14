@@ -10,14 +10,15 @@ class MyElement extends HTMLElement {
     // to interact with it in any way; you won't even be able to listen to events it throws.
     const shadowRoot = this.attachShadow({mode: 'open'});
 
-    // With shadow DOM, the CSS is now encapsulated and scoped to the custom element.
+    // With shadow DOM, the CSS is now encapsulated and scoped to the custom element. But we 
+    // can expose certain attributes using custom variables like in this example.
     shadowRoot.innerHTML = `      
       <style>
         h1 {
-          color: #0000ff;
+          color: var(--header-color); // Red, see <style> in html.
         }
       </style>
-      <h1 id="title">asdasd</h1>
+      <h1 id="title"></h1>
     `;
 
     this.container = shadowRoot.querySelector('#title');
